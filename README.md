@@ -1,10 +1,33 @@
 # 微信公众号文章自动发布助手
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
+[![Python](https://img.shields.io/badge/Python-3.11%2B-blue.svg)](./scripts/requirements.txt)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-majiabin2020%2Fwechat--official--account--article--auto--publisher-black.svg)](https://github.com/majiabin2020/wechat-official-account-article-auto-publisher)
+
 `微信公众号文章自动发布助手` 是一个面向 Skill 场景的微信公众号文章工作流工具。它支持文章智能创作、参考文章改写、公众号文章提取、封面生成、素材上传、草稿创建与发布，并提供从“一句话需求”到“初稿预览”的完整命令行流程。
 
 英文标识：
 
 - `wechat-official-account-article-auto-publisher`
+
+仓库地址：
+
+- [majiabin2020/wechat-official-account-article-auto-publisher](https://github.com/majiabin2020/wechat-official-account-article-auto-publisher)
+
+维护者：
+
+- `majiabin2020`
+
+## 为什么做这个项目
+
+很多微信公众号工作流工具只覆盖“发稿”这一步，但真正耗时的往往是前面的内容整理、改写、起稿、封面、预览和草稿确认。这个项目希望把这些动作串成一条更顺手的链路，让它既能作为 Skill 使用，也能作为本地命令行工具运行。
+
+## 一眼看懂
+
+- 有标题或一句话需求：直接走 `workflow`
+- 有参考文章或公众号链接：先提取或直接 `workflow --mode rewrite`
+- 想先看效果不发稿：加 `--dry-run`
+- 配好微信与图像接口后：可以继续自动创建草稿
 
 ## 功能概览
 
@@ -119,6 +142,23 @@ python scripts/publish_wechat.py draft article.md --template business
 ```bash
 python scripts/publish_wechat.py draft article.md --publish --status
 ```
+
+## 推荐用法
+
+最推荐的入口其实是 `workflow`：
+
+```bash
+python scripts/publish_wechat.py workflow "AI 产品经理的第二曲线" --request "写给产品经理，分析 AI 为什么会先压缩中间层价值，并给出转型建议" --dry-run
+```
+
+它会一次完成：
+
+- 生成创作 brief
+- 生成 prompt 和文章骨架
+- 生成 Markdown 初稿
+- 自动做字数与结构检查
+- 生成公众号 HTML 预览
+- 如果不加 `--dry-run`，还能继续创建公众号草稿
 
 ## CLI 子命令
 
